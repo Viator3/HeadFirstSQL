@@ -1,0 +1,667 @@
+CREATE DATABASE gregs_list;
+
+USE gregs_list;
+
+CREATE TABLE doughnuts_list
+	(
+	doughnuts_name VARCHAR(10),
+	doughnuts_type VARCHAR(6)
+	);
+
+DESC my_contacts;
+
+DROP TABLE my_contacts;
+
+CREATE TABLE my_contacts
+	(
+	last_name VARCHAR(30),
+	first_name VARCHAR(20),
+	email VARCHAR(50),
+	gender CHAR(1),
+	birthday DATE,
+	profession VARCHAR(50),
+	location VARCHAR(50),
+	status VARCHAR(20),
+	interests VARCHAR(100),
+	seeking VARCHAR(100)
+	);
+
+INSERT INTO my_contacts
+	(last_name, first_name, email, gender, birthday, profession, location, status, interests, seeking)
+VALUES
+	('Anderson', 'Djillian', 'jill_anderson@breakneckpizza.com', 'W', '1980-05-09', 'Writer',
+	'Palo Alto, СА', 'Not married', 'kayak, terrarium', 'Friends');
+
+CREATE TABLE doughnuts_purchases
+	(
+	donut_type VARCHAR(20),
+	dozens INT,
+	topping VARCHAR(20),
+	price DEC(4,2)
+	);
+
+INSERT INTO doughnuts_purchases
+	(donut_type, dozens, topping, price)
+VALUES
+	('with jam', 3, 'sprinkles', 3.50);
+
+INSERT INTO my_contacts
+	(first_name, email, profession, location)
+VALUES 
+	('Pet', 'patpost@breakneckpizza.com', 'Postman', 'Princeton, NJ');
+
+CREATE TABLE easy_drinks
+	(
+	drink_name VARCHAR(30), main VARCHAR(30), amount1 DEC(4,2),
+	second VARCHAR(30), amount2 DEC(4,2), directions BLOB
+	);
+
+INSERT INTO easy_drinks
+VALUES
+	('Blackthorn', 'tonic', 1.5, 'pineapple juice', 1, 'shake with ice, pour out, decorate with lemon rind'),
+	('Blue Moon', 'soda', 1.5, 'blueberry juice', .75, 'shake with ice, pour out, decorate with lemon rind'),
+	('Here you are on', 'peachy nectar', 1, 'pineapple juice', 1, 'shake with ice, pour into glasses'),
+	('Lime fizzy', 'sprite', 1.5, 'lime juice', .75, 'shake with ice, pour out'),
+	('Kiss', 'cherry juice', 2, 'apricot nectar', 7, 'serve with ice and straw'),
+	('Hot Gold', 'peachy nectar', 3, 'orange juice', 6, 'pour hot orange juice into a mug,
+	add peachy nectar'),
+	('Lonely tree', 'soda', 1.5, 'cherry juice', .75, 'shake with ice, pour out'),
+	('Greyhound', 'soda', 1.5, 'grapefruit juice', 5, 'serve with ice, shake thoroughly'),
+	('Indian summer', 'apple juice', 2, 'hot tea', 6, 'pour the juice into a mug, add hot tea'),
+	('Frog', 'cold tea', 1.5, 'lemonade', 5, 'serve on ice with a slice of lime'),
+	('Soda plus', 'soda', 2, 'grape juice', 1, 'stir in a glass, serve without ice');
+
+SELECT drink_name, main, second
+FROM easy_drinks
+WHERE main = 'soda';
+
+SELECT drink_name FROM easy_drinks WHERE main = 'cherry juice';
+
+INSERT INTO clown_info
+VALUES
+	('Elsie', 'Cherry Hill House for the Elderly', 'W, red hair, green suit, huge shoes', 'balls, cars'),
+	('Pickles', 'Jack Green's Party', 'M, orange hair, blue suit, huge shoes', 'mime'),
+	('Snagles', 'Bolmart', 'W, yellow shirt, red pants', 'horn, umbrella'),
+	('Mr. Hobo', 'Circus BG', 'M, cigar, black hair, little hat', 'violin'),
+	('Clarabelle', 'Belmont's Nursing Home', 'W, pink hair, big flower, blue dress', 'chanting, dancing'),
+	('Scooter', 'Oakland Hospital', 'M, blue hair, red suit, big nose', 'balls'),
+	('Zippo', 'Milstown Shopping Center', 'W, orange suit, pants', 'dances'),
+	('Babe', 'Driving School Earl', 'W, pink suit with sparkles', 'balancing, cars'),
+	('Bonzo', NULL, 'M, women's polka-dot dress', 'singing, dancing'),
+	('Sniflyz', 'Tracy's Institution', 'M, green-purple suit, long nose', NULL);
+
+INSERT INTO clown_info
+VALUES
+	('Zippo', 'Milstown Shopping Center', 'W, orange suit, pants', 'dancing, singing'),
+	('Snagles', 'Bolmart', 'W, yellow shirt, blue pants', 'horn, umbrella'),
+	('Bonzo', 'Park Dixon', 'M, women's polka-dot dress', 'singing, dancing'),
+	('Sniffles', 'Tracy's Institution', 'M, green-purple suit, long nose', 'driving around'),
+	('Mr. Hobo', 'Eric Gray's Party', 'M, cigar, black hair, little hat', 'violin');
+
+DELETE FROM clown_info
+WHERE activities = 'dancing';
+
+INSERT INTO clown_info
+VALUES
+	('Clarabelle', 'Belmont's Nursing Home', 'F, pink hair, large flower, blue dress', 'dancing');
+
+DELETE FROM clown_info
+WHERE activities = 'chants, dances';
+
+UPDATE clown_info
+SET activities = 'dancing'
+WHERE name = 'Zippo';
+
+SELECT * FROM clown_info WHERE name = 'Snagles' AND appearance LIKE '%blue%';
+
+SELECT * FROM clown_info WHERE name = 'Bonzo' AND last_seen = 'Park Dixon';
+
+SELECT * FROM clown_info WHERE name = 'Sniffles' AND activities LIKE '%driving%';
+
+SELECT * FROM clown_info WHERE name = 'Mr. Hobo' AND last_seen <> 'Circus BG';
+
+CREATE TABLE my_contacts 
+(
+	contact_id INT NOT NULL AUTO_INCREMENT,
+ 	last_name VARCHAR(30) DEFAULT NULL,
+ 	first_name VARCHAR(20) DEFAULT NULL,
+ 	email VARCHAR(50) DEFAULT NULL,
+ 	gender CHAR(1) DEFAULT NULL,
+ 	birthday DATE DEFAULT NULL,
+ 	profession VARCHAR(50) DEFAULT NULL,
+ 	location VARCHAR(50) DEFAULT NULL,
+ 	status VARCHAR(20) DEFAULT NULL,
+ 	interests VARCHAR(100) DEFAULT NULL,
+ 	seeking VARCHAR(100) DEFAULT NULL,
+	PRIMARY KEY (contact_id)
+);
+
+CREATE TABLE your_table 
+(
+	id INT NOT NULL AUTO_INCREMENT,
+	first_name VARCHAR(30) NOT NULL,
+ 	last_name VARCHAR(30) NOT NULL,
+ 	PRIMARY KEY (id)
+);
+
+INSERT INTO your_table
+	(id, first_name, last_name)
+VALUES 
+	(NULL, 'Marcia', 'Brady');
+
+ALTER TABLE my_contacts 
+	ADD COLUMN contact_id INT NOT NULL AUTO_INCREMENT FIRST,
+	ADD PRIMARY KEY (contact_id);
+
+ALTER TABLE projekts
+RENAME TO project_list;
+
+ALTER TABLE project_list
+CHANGE COLUMN number proj_id INT NOT NULL AUTO_INCREMENT,
+ADD PRIMARY KEY (proj_id);
+
+ALTER TABLE project_list
+CHANGE COLUMN description proj_desc VARCHAR(150),
+CHANGE COLUMN contract con_name VARCHAR(30);
+
+ALTER TABLE project_list
+ADD COLUMN con_phone VARCHAR(15),
+ADD COLUMN start_date DATE,
+ADD COLUMN est_cost DEC(8,2);
+
+CREATE TABLE hooptie
+	(
+	color VARCHAR(30),
+	'year' INT,
+	make VARCHAR(20),
+	mo VARCHAR(15),
+	howmuch DEC(8,2);
+
+INSERT INTO hooptie
+VALUES
+	('silver', 1998, 'Porsche', 'Boxter', 17992.54),
+        (NULL, 2000, 'Jaguar', 'XJ', 15995),
+        ('red', 2002, 'Cadillac', 'Escalade', 40215.9);
+
+ALTER TABLE hooptie
+RENAME TO car_table;
+
+ALTER TABLE car_table
+ADD COLUMN car_id INT NOT NULL AUTO_INCREMENT FIRST,
+ADD PRIMARY KEY(car_id);
+
+ALTER TABLE car_table
+ADD COLUMN VIN VARCHAR(20) AFTER car_id;
+
+ALTER TABLE car_table
+CHANGE COLUMN mo model VARCHAR(35);
+
+ALTER TABLE car_table
+CHANGE COLUMN howmuch price DEC(7,2);
+
+ALTER TABLE my_contacts
+ADD COLUMN city VARCHAR(40) AFTER profession,
+ADD COLUMN state CHAR(2) AFTER location;
+
+SELECT RIGHT(location, 2) FROM my_contacts;
+
+SELECT SUBSTRING_INDEX(location, ', ', 1) FROM my_contacts;
+
+UPDATE my_contacts
+SET state = RIGHT(location, 2);
+
+UPDATE my_contacts
+SET city = SUBSTRING_INDEX(location, ', ', 1);
+
+CREATE TABLE test_chars
+	(chars_id INT NOT NULL AUTO_INCREMENT, chars CHAR(1), PRIMARY KEY(chars_id));
+
+
+INSERT INTO test_chars
+	(chars)
+VALUES 
+	('0'), ('1'), ('2'), ('3'), ('A'), ('B'), ('C'), ('D'), ('a'), ('b'), ('c'), ('d'),
+	('!'), ('@'), ('#'), ('$'), ('%'), ('^'), ('&'), ('*'), ('('), (')'), ('-'), ('_'),
+	('+'), ('='), ('['), (']'), ('{'), ('}'), (';'), (':'), (''''), ('"'), ('\\'), ('|'),
+	('`'), ('~'), (','), ('.'), ('<'), ('>'), ('/'), ('?'), (' '), (NULL);
+
+SELECT chars_id, chars
+FROM test_chars
+ORDER BY title;
+
+
+CREATE TABLE cookie_sales
+	(ID INT NOT NULL AUTO_INCREMENT, first_name VARCHAR(20), sales DEC(7,2), sales_date DATE, PRIMARY KEY(ID));
+
+INSERT INTO cookie_sales
+	(first_name, sales, sales_date)
+VALUES 
+	('Lindsey', 32.02, '2007-03-06'), ('Paris', 26.53, '2007-03-06'), ('Britney', 11.25, '2007-03-06'),
+	('Nicole', 18.96, '2007-03-06'), ('Lindsey', 9.16, '2007-03-07'), ('Paris', 1.52, '2007-03-07'),
+	('Britney', 43.21, '2007-03-07'), ('Nicole', 8.05, '2007-03-07'), ('Lindsey', 17.62, '2007-03-08'),
+	('Paris', 24.19, '2007-03-08'), ('Britney', 3.40, '2007-03-08'), ('Nicole', 15.21, '2007-03-08'),
+	('Lindsey', 0, '2007-03-09'), ('Paris', 31.99, '2007-03-09'), ('Britney', 2.58, '2007-03-09'),
+	('Nicole', 0, '2007-03-09'), ('Lindsey', 2.34, '2007-03-10'), ('Paris', 13.44, '2007-03-10'),
+	('Britney', 8.78, '2007-03-10'), ('Nicole', 26.82, '2007-03-10'), ('Lindsey', 3.71, '2007-03-11'),
+	('Paris', 0.56, '2007-03-11'), ('Britney', 34.19, '2007-03-11'), ('Nicole', 7.77, '2007-03-11'),
+	('Lindsey', 16.23, '2007-03-12'), ('Paris', 0, '2007-03-12'), ('Britney', 4.50, '2007-03-12'),
+	('Nicole', 19.22, '2007-03-12');
+
+SELECT SUM(sales)
+FROM cookie_sales
+WHERE first_name = 'Nicole';
+
+SELECT first_name, SUM(sales)
+FROM cookie_sales
+GROUP BY first_name
+ORDER BY SUM(sales) DESC;
+
+SELECT first_name, COUNT(sales_date)
+FROM cookie_sales
+GROUP BY first_name;
+
+SELECT DISTINCT sales_date
+FROM cookie_sales
+ORDER BY sales_date;
+
+SELECT first_name, COUNT(DISTINCT sales_date)
+FROM cookie_sales
+GROUP BY first_name;
+
+
+SELECT first_name, SUM(sales)
+FROM cookie_sales
+GROUP BY first_name
+ORDER BY SUM(sales) DESC
+LIMIT 1,1;
+
+INSERT INTO my_contacts
+VALUES
+	(NULL, 'Mur', 'Najdgel', '5552311111', 'nigelmoore@ranchersrule.com', 'M', 
+        '1975-08-28', 'Farmer', 'Austin', 'TX', 'Not married', 'animals, horses, cinema', 
+        'Unmarried woman'),
+	(NULL, 'Fiore', 'Karla', '5557894855', 'cfiore@fioreanimalclinic.com', 'W', 
+        '1974-01-07', 'Vet', 'Round Rock', 'TX', 'Not married', 
+        'horses, cinema, animals, detectives, tourism', 'Lonely man'),
+        (NULL, 'Salivan', 'Redji', '5552311122', 'me@kathieleeisaflake.com', 'M', 
+        '1955-03-20', 'Comedian', 'Cambridge', 'MA', 'Not married', 
+        'animals, collectible cards, geo-search', 'Woman'),
+        (NULL, 'Fergusson', 'Aleksis', '5550983476', 'alexangel@yahoo.com', 'W', 
+        '1956-09-19', 'Painter', 'Pflugerville', 'MA', 'Not married', 
+        'animals', 'Man');
+
+UPDATE my_contacts
+SET birthday = '1975-08-28'
+WHERE contact_id = 3;
+
+ALTER TABLE my_contacts
+ADD COLUMN interest4 VARCHAR(40) AFTER interests,
+ADD COLUMN interest3 VARCHAR(40) AFTER interests,
+ADD COLUMN interest2 VARCHAR(40) AFTER interests,
+ADD COLUMN interest1 VARCHAR(40) AFTER interests;
+
+UPDATE my_contacts
+SET interest1 = SUBSTRING_INDEX(interests, ',', 1);
+
+SELECT LTRIM(RIGHT(interests, (CHAR_LENGTH(interests) - CHAR_LENGTH(interest1) - 1))) FROM my_contacts;
+
+UPDATE my_contacts
+SET interests = LTRIM(RIGHT(interests, (CHAR_LENGTH(interests) - CHAR_LENGTH(interest1) - 1)));
+
+UPDATE my_contacts
+SET interest2 = SUBSTRING_INDEX(interests, ',', 1);
+
+UPDATE my_contacts
+SET interests = LTRIM(RIGHT(interests, (CHAR_LENGTH(interests) - CHAR_LENGTH(interest2) - 1)));
+
+UPDATE my_contacts
+SET interest3 = SUBSTRING_INDEX(interests, ',', 1);
+
+UPDATE my_contacts
+SET interests = LTRIM(RIGHT(interests, (CHAR_LENGTH(interests) - CHAR_LENGTH(interest3) - 1)));
+
+UPDATE my_contacts
+SET interest4 = SUBSTRING_INDEX(interests, ',', 1);
+
+ALTER TABLE my_contacts
+DROP COLUMN interests;
+
+CREATE TABLE interests
+	(
+	int_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	interest VARCHAR(50) NOT NULL,
+	cont_id INT NOT NULL,
+	CONSTRAINT my_contacts_contact_id_fk
+	FOREIGN KEY (cont_id)
+	REFERENCES my_contacts (contact_id)
+	);
+
+CREATE TABLE profession
+(
+	prof_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	profession VARCHAR(30)
+)
+AS
+	SELECT profession FROM my_contacts
+	GROUP BY profession
+	ORDER BY profession
+;
+
+SELECT DISTINCT seeking FROM my_contacts
+
+ORDER BY seeking;
+
+INSERT INTO toys (toy)
+
+VALUES ('hoop'), ('plane'), ('soldiers'), ('harmonica'), ('baseball cards');
+
+SELECT t.toy, b.boy
+FROM toys t, boys b
+
+SELECT b.boy, t.toy
+
+FROM boys b INNER JOIN toys t
+
+ON b.toy_id = t.toy_id;
+
+alter table my_contacts
+
+add column prof_id INT;
+
+update my_contacts, profession
+
+set my_contacts.prof_id = profession.prof_id
+
+where my_contacts.profession = profession.profession;
+
+alter table my_contacts
+
+add constraint profession_prof_id_fk
+
+foreign key(prof_id)
+
+references profession(prof_id);
+
+CREATE TABLE zip_code
+
+(
+	
+	zip_code INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    
+	city VARCHAR(30),
+    
+	state CHAR(2)
+
+);
+
+
+INSERT INTO zip_code (city)
+
+	SELECT city FROM my_contacts
+
+	GROUP BY city
+
+    	ORDER BY city;
+
+
+UPDATE my_contacts, zip_code
+
+SET zip_code.state = my_contacts.state
+
+WHERE my_contacts.city = zip_code.city;
+
+ALTER TABLE my_contacts
+
+ADD COLUMN zip_code INT;
+
+
+UPDATE my_contacts, zip_code
+
+SET my_contacts.zip_code = zip_code.zip_code
+
+WHERE my_contacts.city = zip_code.city;
+
+SELECT seeking.seeking_id
+
+FROM my_contacts NATURAL JOIN seeking;
+
+CREATE TABLE contact_seeking
+
+(
+contact_id INT
+)
+
+AS
+
+	SELECT contact_id FROM my_contacts
+
+   	ORDER BY contact_id
+;
+
+ALTER TABLE contact_seeking
+
+ADD COLUMN seeking_id INT;
+
+UPDATE contact_seeking t1, (SELECT my_contacts.contact_id, seeking.seeking_id 
+FROM my_contacts NATURAL JOIN seeking) t2
+
+SET t1.seeking_id = t2.seeking_id
+
+WHERE t1.contact_id = t2.contact_id;
+
+ALTER TABLE contact_seeking
+
+
+ADD CONSTRAINT my_contacts_contact_id_fk
+
+
+FOREIGN KEY(contact_id)
+
+
+REFERENCES my_contacts(contact_id),
+
+
+ADD CONSTRAINT seeking_seeking_id_fk
+
+
+FOREIGN KEY(seeking_id)
+
+
+REFERENCES seeking(seeking_id);
+
+CREATE TABLE interests
+
+(
+
+	interest_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	interest VARCHAR(40)
+
+)
+
+AS
+
+SELECT LOWER(my_contacts.interest1) interest FROM my_contacts
+
+WHERE interest1 <> ''
+
+UNION
+
+SELECT LOWER(my_contacts.interest2) interest FROM my_contacts
+
+WHERE interest2 <> ''
+
+UNION
+
+SELECT LOWER(my_contacts.interest3) interest FROM my_contacts
+
+WHERE interest3 <> ''
+
+UNION
+
+SELECT LOWER(my_contacts.interest4) interest FROM my_contacts
+
+WHERE interest4 <> ''
+
+ORDER BY interest;
+
+CREATE TABLE contact_interest
+
+(
+
+	contact_id INT,
+	interest_id INT
+
+)
+
+AS
+
+	SELECT * FROM (SELECT my_contacts.contact_id, interests.interest_id
+ FROM
+		my_contacts INNER JOIN interests
+ ON my_contacts.interest1 = interests.interest) contact_interest1
+
+UNION ALL
+
+	SELECT * FROM (SELECT my_contacts.contact_id, interests.interest_id
+ FROM
+		my_contacts INNER JOIN interests ON my_contacts.interest2 = interests.interest) contact_interest2
+
+UNION ALL
+
+	SELECT * FROM (SELECT my_contacts.contact_id, interests.interest_id
+ FROM
+		my_contacts INNER JOIN interests ON my_contacts.interest3 = interests.interest) contact_interest3
+
+UNION ALL
+	SELECT * FROM (SELECT my_contacts.contact_id, interests.interest_id
+ FROM
+		my_contacts INNER JOIN interests 
+ON my_contacts.interest4 = interests.interest) contact_interest4
+
+ORDER BY contact_id;
+
+
+ALTER TABLE contact_interest
+
+ADD CONSTRAINT my_contacts_contact_id_fk1
+
+FOREIGN KEY(contact_id)
+
+REFERENCES my_contacts(contact_id),
+
+ADD CONSTRAINT interests_interest_id_fk
+
+FOREIGN KEY(interest_id)
+
+REFERENCES interests(interest_id);
+
+CREATE TABLE job_current
+
+(
+
+	contact_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+
+	title VARCHAR(30),
+
+ 	salary DEC(8,2),
+
+	start_date DATE
+
+);
+
+ALTER TABLE job_current
+
+ADD CONSTRAINT my_contacts_contact_id_fk2
+
+FOREIGN KEY(contact_id)
+
+REFERENCES my_contacts(contact_id);
+
+INSERT INTO job_current
+
+VALUES
+	
+	(4, 'Vet', 3500, '2015/01/25'),
+
+    	(14, 'Farmer', 4500, '2016/02/20'),
+
+  	(1, 'Writer', 7500, '2010/11/04'),
+
+   	(6, 'Painter', 5000.50, '2012/07/14');
+
+CREATE TABLE job_desired
+
+(
+	
+	contact_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+
+	title VARCHAR(30),
+
+ 	salary_low DEC(8,2),
+
+	salary_high DEC(8,2),
+	available CHAR(1),
+
+	years_exp DEC(3,1)
+
+
+);
+
+
+
+ALTER TABLE job_desired
+
+ADD CONSTRAINT my_contacts_contact_id_fk3
+
+FOREIGN KEY(contact_id)
+
+REFERENCES my_contacts(contact_id);
+
+CREATE TABLE job_listings
+(
+	
+	job_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+
+	title VARCHAR(30),
+
+ 	salary DEC(8,2),
+
+	zip VARCHAR(20),
+
+	description VARCHAR(255)
+
+);
+
+CREATE VIEW gender_w AS
+
+SELECT first_name, last_name, phone FROM my_contacts
+
+WHERE gender = 'W';
+
+CREATE VIEW job_raises AS
+
+SELECT mc.first_name firstname, mc.last_name lastname, mc.email email, mc.phone phone,
+
+	jc.salary salary, jd.salary_low salarylow, (jd.salary_low - salary) raise
+
+FROM my_contacts mc NATURAL JOIN job_current jc
+
+INNER JOIN job_desired jd
+ ON jc.contact_id = jd.contact_id;
+
+START TRANSACTION;
+SELECT * FROM piggy_bank;
+UPDATE piggy_bank SET coin = 'Q' WHERE coin = 'P';
+SELECT * FROM piggy_bank;
+ROLLBACK;
+SELECT * FROM piggy_bank;
+
+SET PASSWORD FOR 'root'@'localhost' = '***...';
+
+CREATE USER frank, jim, joe IDENTIFIED BY '123';
+
+GRANT SELECT ON gregs_list.* TO joe;
+GRANT SELECT, INSERT, UPDATE ON gregs_list.* TO jim;
+GRANT SELECT ON gregs_list.* TO frank;
+GRANT DELETE ON job_listings TO frank;
+
